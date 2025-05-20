@@ -4,6 +4,93 @@
 <div id="label-container"></div>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+<style>
+  body {
+    font-family: 'Arial', sans-serif; /* Cambia la fuente */
+    display: flex; /* Para centrar el contenido */
+    flex-direction: column; /* Para que los elementos se apilen verticalmente */
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    min-height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+    background-color: #f0f2f5; /* Un color de fondo suave */
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  div {
+    margin-bottom: 15px; /* Espacio entre los divs */
+  }
+
+  h1 {
+    color: #2c3e50; /* Color del título */
+    margin-bottom: 25px;
+    text-align: center;
+  }
+
+  button {
+    background-color: #4CAF50; /* Un verde vibrante para el botón */
+    color: white; /* Texto blanco */
+    padding: 12px 25px; /* Relleno del botón */
+    border: none; /* Sin borde */
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    font-size: 1.1em; /* Tamaño de fuente más grande */
+    transition: background-color 0.3s ease; /* Transición suave al pasar el ratón */
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  }
+
+  button:hover {
+    background-color: #45a049; /* Color más oscuro al pasar el ratón */
+  }
+
+  #webcam-container {
+    border: 3px solid #3498db; /* Un borde azul para el contenedor de la webcam */
+    border-radius: 10px; /* Bordes redondeados */
+    overflow: hidden; /* Asegura que el contenido no se salga del borde */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+    background-color: #fff; /* Fondo blanco para el contenedor */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 206px; /* Ancho un poco más grande que el canvas para el borde */
+    height: 206px; /* Alto un poco más grande que el canvas para el borde */
+  }
+
+  #webcam-container canvas {
+      display: block; /* Elimina espacio extra debajo del canvas */
+  }
+
+  #label-container {
+    margin-top: 20px;
+    background-color: #ffffff; /* Fondo blanco para las etiquetas */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Ocupa el 90% del ancho disponible */
+    max-width: 300px; /* Ancho máximo para que no sea demasiado grande */
+    text-align: center;
+  }
+
+  #label-container div {
+    font-size: 1.1em;
+    color: #333;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee; /* Línea divisoria entre las etiquetas */
+  }
+
+  #label-container div:last-child {
+    border-bottom: none; /* Sin línea divisoria en la última etiqueta */
+  }
+</style>
+
+<div>
+    <h1>Teachable Machine Image Model</h1>
+    <button type="button" onclick="init()">Start</button>
+    <div id="webcam-container"></div>
+    <div id="label-container"></div>
+</div>
 <script type="text/javascript">
   // More API functions here:
   // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
